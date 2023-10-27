@@ -1,0 +1,11 @@
+host-type:
+  CTFHost: "Capture The Flag"
+  QuakeHost: "Quake"
+
+host-material:
+  CTFHost: "PAPER"
+  QuakeHost: "WOOD_HOE"
+
+hosts:
+  - "CTFHost"
+  - "QuakeHost"

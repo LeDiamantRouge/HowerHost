@@ -1,3 +1,6 @@
 name: HowerHost
 version: '${project.version}'
 main: fr.lediamantrouge.howerhost.Main
+
+commands:
+  host:
