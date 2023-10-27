@@ -21,10 +21,14 @@ public class CreateHostGui extends MultiGUI {
     public void putItems() {
         for (String host : Main.getInstance().getConfig().getStringList("hosts")) {
             addFillerItem(new ItemBuilder(Material.getMaterial(Main.getInstance().getConfig().getString("host-material." + host))).setDisplayName("§e§lHost de " + Main.getInstance().getConfig().getString("host-type." + host)).build(false), e -> {
-                CommonMain.getInstance().getServerCreator().createServer(host);
-                getPlayer().sendMessage("§aVotre host à été créer !");
-                getPlayer().closeInventory();
-                new MainGui(getPlayer().getUniqueId()).open(true);
+                if (getPlayer().hasPermission("howerhost.allow." + host) || getPlayer().hasPermission("howerhost.allow.*")) {
+                    CommonMain.getInstance().getServerCreator().createServer(host);
+                    getPlayer().sendMessage("§aVotre host à été créer !");
+                    getPlayer().closeInventory();
+                    new MainGui(getPlayer().getUniqueId()).open(true);
+                } else {
+                    getPlayer().sendMessage("§cVous ne pouvez pas créer ce type de host avec votre grade.");
+                }
             });
         }
         setPatternItems(getCorners(), new ItemBuilder(Material.STAINED_GLASS_PANE).setLeatherArmorColor(Color.ORANGE).setDisplayName(" ").build(false), e -> {});
