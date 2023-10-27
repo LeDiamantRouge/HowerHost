@@ -26,18 +26,18 @@ public class MainGui extends MultiGUI {
     @Override
     public void putItems() {
         setPatternItems(getCorners(), new ItemBuilder(Material.STAINED_GLASS_PANE).setLeatherArmorColor(Color.ORANGE).setDisplayName(" ").build(false), e -> {});
-        List<String> lore = new ArrayList<>();
         boolean found = false;
         for (Server server : CommonMain.getInstance().getServerManager().getServers()) {
             if (Main.getInstance().getConfig().getStringList("hosts").contains(server.getTemplate())) {
                 found = true;
+                List<String> lore = new ArrayList<>();
                 lore.add("§8" + server.getName());
                 lore.add("");
                 lore.add("    §f§l▪ §7Statut: §f?");
                 lore.add("    §f§l▪ §7Créateur: §f?");
                 lore.add("    §f§l▪ §7Serveur : §a" + server.getDisplayName());
                 lore.add("");
-                addFillerItem(new ItemBuilder(Main.getInstance().getConfig().getItemStack("host-material." + server.getTemplate())).setDisplayName("§e§lHost de " + Main.getInstance().getConfig().getString("host-type." + server.getTemplate())).setLoreWithList(lore).build(false), e -> {
+                addFillerItem(new ItemBuilder(Material.getMaterial(Main.getInstance().getConfig().getString("host-material." + server.getTemplate()))).setDisplayName("§e§lHost de " + Main.getInstance().getConfig().getString("host-type." + server.getTemplate())).setLoreWithList(lore).build(false), e -> {
                     getPlayer().sendMessage("§aConnexion en cours vers " + server.getDisplayName());
                     BungeeCordManager.sendPlayerToServer(getPlayer(), server.getName());
                     getPlayer().closeInventory();
